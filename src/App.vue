@@ -1,11 +1,17 @@
 <script>
 import axios from "axios";
-import { store } from "./assets/data/store";
+import { store } from "@/assets/data/store";
+
+import Main from "./components/Main.vue";
 
 export default {
+  components: {
+    Main,
+  },
   data() {
     return {
-      projects: [],
+      store,
+      axios,
     };
   },
   methods: {
@@ -14,8 +20,8 @@ export default {
       axios
         .get(store.apiUrl)
         .then((result) => {
-          this.projects = result.data.data;
-          console.log(result.data.data);
+          store.projects = result.data.data;
+          console.log(store.projects);
         })
         .catch((error) => {
           console.log(error.message);
@@ -32,9 +38,9 @@ export default {
 <template>
   <div>
     <h1>Progetti</h1>
-    <ul>
-      <li></li>
-    </ul>
+    <div>
+      <Main />
+    </div>
   </div>
 </template>
 
