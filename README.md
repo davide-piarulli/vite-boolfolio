@@ -16,3 +16,12 @@ Creiamo un nuovo componente ProjectCard, che corrisponde ad una card per visuali
 # Bonus:
 
 Gestire la paginazione dei risultati
+
+## NEW
+
+Ciao a tutti/e,
+oggi continuate sulle repo in corso ossia vite-boolfolio per il frontend e laravel-apiper il backend (se doveste aggiungere API)
+Nel frontend aggiungete il ruoter con almeno 3 rotte di cui una è la pagina che effettua la chiamata API.
+BONUS
+Aggiungete la navigazione alla pagina dei progetti
+aggiungete altre chiamate API per avere l’elenco dei types e technologies
