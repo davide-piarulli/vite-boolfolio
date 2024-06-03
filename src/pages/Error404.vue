@@ -5,7 +5,7 @@ export default {
 </script>
 
 <template>
-  <div>
+  <div class="container">
     <h1>Errore 404</h1>
     <p>Pagina non trovata!</p>
   </div>

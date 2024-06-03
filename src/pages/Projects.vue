@@ -41,6 +41,8 @@ export default {
         :key="project.id"
         :id="project.id"
         :title="project.title"
+        :type="project.type.name"
+        :technologies="project.technologies"
         :description="project.description"
       />
     </div>
