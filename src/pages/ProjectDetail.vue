@@ -1,11 +1,28 @@
 <script>
+import axios from "axios";
+import { store } from "@/assets/data/store";
 export default {
   name: "ProjectDetail",
-  mounted() {
-    console.log(this.$route.params.slug);
+  data() {
+    return {
+      project: {},
+    };
   },
-  props: {
-    project: Object,
+  methods: {
+    getApi() {
+      const slug = this.$route.params.slug;
+      axios
+        .get(store.apiUrl + "project-by-slug/" + slug)
+        .then((result) => {
+          this.project = result.data.project;
+        })
+        .catch((error) => {
+          console.log(error.message);
+        });
+    },
+  },
+  mounted() {
+    this.getApi();
   },
 };
 </script>
