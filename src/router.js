@@ -4,6 +4,7 @@ import Home from "./pages/Home.vue";
 import About from "./pages/About.vue";
 import Projects from "./pages/Projects.vue";
 import Contacts from "./pages/Contacts.vue";
+import ProjectDetail from "./pages/ProjectDetail.vue";
 import Error404 from "./pages/Error404.vue";
 
 const router = createRouter({
@@ -30,6 +31,11 @@ const router = createRouter({
       path: "/contatti",
       name: "contacts",
       component: Contacts,
+    },
+    {
+      path: "/dettaglio-progetti/:slug",
+      name: "projectDetail",
+      component: ProjectDetail,
     },
     {
       // così si gestiscono tutte le altre rotte non trovate per restituire la pagina errore 404 e bisogna metterlo in fondo alle rotte

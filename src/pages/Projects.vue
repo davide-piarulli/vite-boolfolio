@@ -39,11 +39,7 @@ export default {
       <ProjectCard
         v-for="project in store.projects"
         :key="project.id"
-        :id="project.id"
-        :title="project.title"
-        :type="project.type.name"
-        :technologies="project.technologies"
-        :description="project.description"
+        :project="project"
       />
     </div>
   </div>

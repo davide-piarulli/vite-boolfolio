@@ -1,13 +1,7 @@
 <script>
-import { store } from "@/assets/data/store";
-
 export default {
   props: {
-    id: String,
-    title: String,
-    description: String,
-    type: String,
-    technologies: Array,
+    project: Object,
   },
 };
 </script>
@@ -16,20 +10,26 @@ export default {
   <div class="col">
     <div class="card" style="width: 18rem">
       <div class="card-body">
-        <h5 class="card-title">{{ id }} - Titolo: {{ title }}</h5>
+        <h5 class="card-title">
+          ID: {{ project.id }} - Titolo:
+          <router-link
+            :to="{ name: 'projectDetail', params: { slug: project.slug } }"
+            >{{ project.title }}</router-link
+          >
+        </h5>
 
         <h5>Tipo:</h5>
-        <span>{{ type }}</span>
+        <span>{{ project.type.name }}</span>
 
         <h5>Tecnologia:</h5>
         <span
           class="badge roudned-pill text-bg-info me-1"
-          v-for="(technology, index) in technologies"
+          v-for="(technology, index) in project.technologies"
           :key="index"
           >{{ technology.name }}</span
         >
         <p class="card-text">
-          {{ description }}
+          {{ project.description }}
         </p>
       </div>
     </div>
