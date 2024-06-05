@@ -1,6 +1,6 @@
 <script>
-import axios from 'axios';
-import { store } from '@/assets/data/store';
+import axios from "axios";
+import { store } from "@/assets/data/store";
 
 export default {
   name: "Contacts",
@@ -19,10 +19,14 @@ export default {
         message: this.message,
       };
 
-      axios.post(store.apiUrl + 'send-email')
-      .then(result =>{
-        console.log(result);
-      })
+      axios
+        .post(store.apiUrl + "send-email", data)
+        .then((result) => {
+          console.log(result.data);
+        })
+        .catch((error) => {
+          console.log(error.message);
+        });
       console.log(data);
     },
   },
