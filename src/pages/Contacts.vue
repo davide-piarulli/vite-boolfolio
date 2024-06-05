@@ -9,10 +9,18 @@ export default {
       name: "Davide",
       email: "dade@dade.it",
       message: "Questo è un messaggio di test",
+      sending: false,
+      sent: false,
+      errors: {
+        name: [],
+        email: [],
+        message: [],
+      },
     };
   },
   methods: {
     sendEmail() {
+      this.sending = true;
       const data = {
         name: this.name,
         email: this.email,
@@ -22,9 +30,21 @@ export default {
       axios
         .post(store.apiUrl + "send-email", data)
         .then((result) => {
+          this.sending = false;
           console.log(result.data);
+          this.sent = result.data.success;
+          if (!result.data.success) {
+            this.errors = result.data.errors;
+          } else {
+            this.errors = {
+              name: [],
+              email: [],
+              message: [],
+            };
+          }
         })
         .catch((error) => {
+          this.sending = false;
           console.log(error.message);
         });
       console.log(data);
@@ -36,39 +56,47 @@ export default {
 <template>
   <div class="container">
     <h1>Contattaci</h1>
-    <form @submit.prevent="sendEmail">
-      <div class="mb-3">
-        <label for="name" class="form-label">Nome</label>
-        <input v-model="name" type="text" class="form-control" id="name" />
-      </div>
-
-      <div class="mb-3">
-        <label for="email" class="form-label">Indirizzo Email</label>
-        <input
-          v-model="email"
-          type="email"
-          class="form-control"
-          id="email"
-          aria-describedby="emailHelp"
-        />
-        <div id="emailHelp" class="form-text">
-          Non condivideremo mai il tuo indirizzo mail.
+    <div v-if="!sending">
+      <form v-if="!sent" @submit.prevent="sendEmail">
+        <div class="mb-3">
+          <label for="name" class="form-label">Nome</label>
+          <input v-model="name" type="text" class="form-control" id="name" />
+          <p class="error">{{ errors.name?.toString() }}</p>
         </div>
-      </div>
 
-      <div class="mb-3">
-        <label for="message" class="form-label">Messaggio</label>
-        <textarea
-          v-model="message"
-          name="message"
-          id="message"
-          cols="30"
-          rows="10"
-        ></textarea>
-      </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Indirizzo Email</label>
+          <input
+            v-model="email"
+            type="email"
+            class="form-control"
+            id="email"
+            aria-describedby="emailHelp"
+          />
+          <p class="error">{{ errors.email?.toString() }}</p>
 
-      <button type="submit" class="btn btn-primary">Contattaci</button>
-    </form>
+          <div id="emailHelp" class="form-text">
+            Non condivideremo mai il tuo indirizzo mail.
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="message" class="form-label">Messaggio</label>
+          <textarea
+            v-model="message"
+            name="message"
+            id="message"
+            cols="30"
+            rows="10"
+          ></textarea>
+          <p class="error">{{ errors.message?.toString() }}</p>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Contattaci</button>
+      </form>
+      <h3 v-else>Email inviata correttamente!</h3>
+    </div>
+    <p v-else>Loading ...</p>
   </div>
 </template>
 
